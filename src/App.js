@@ -13,6 +13,7 @@ export default class App extends PureComponent {
   render() {
     return (
         <div>
+          <Header/>
           <Buttons> </Buttons>
             <Content/>
         </div>

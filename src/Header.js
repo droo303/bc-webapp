@@ -1,93 +1,77 @@
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import styled from 'styled-components';
-import {Component} from "react/cjs/react.production.min";
 
+
+const { ethereum } = window;
+const isMetaMaskInstalled = () => {
+    return Boolean(ethereum && ethereum.isMetaMask);
+};
+
+const MetaMaskClientCheck = () => {
+    if (!isMetaMaskInstalled()) {
+        return String("Install");
+    } else {
+        return String("Connect to wallet");
+    }
+};
 
 export default class Header extends Component {
    constructor(props) {
        super(props);
        this.state = {
-            scrolling: false,
-            display: 'flex',
-            color: 'red'
+           button_text: ''
        }
-       this.handleScroll=this.handleScroll.bind(this);
    }
 
-   changeColor = () => {
-     this.setState({
-       color: 'blue'
-     })
+   componentDidMount() {
+        this.setState({button_text: MetaMaskClientCheck()})
+   }
 
+   async handleClick() {
+       try {
+           if (this.state.button_text === "Install") {
+                // TODO open installation
+           } else if (this.state.button_text === "Connect to wallet") {
+               await ethereum.request({method: 'eth_requestAccounts'});}
+       } catch (e) {
+           console.error(e);
+       }
    }
 
     render() {
         return (
             <StyledHeader>
-                <nav>
-                    <Ul color={this.state.color}>
-                        <Li color={this.state.color}><A href="#home">Home</A></Li>
-                        <Li><A href="#news">News</A></Li>
-                        <Li><A href="#contact">Contact</A></Li>
-                        <Li><A className="active" href="#about">About</A></Li>
-                    </Ul>
-                </nav>
+                    <Nav>
+                        <Button>Home</Button>
+                        <Button onClick={this.handleClick.bind(this)}>{this.state.button_text}</Button>
+                    </Nav>
             </StyledHeader>
         );
     }
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-    handleScroll(event) {
-        if (window.scrollY === 0 && this.state.scrolling === true) {
-            this.setState({scrolling: false});
-        }
-        else if (window.scrollY !== 0 && this.state.scrolling !== true) {
-            this.setState({scrolling: true});
-        }
-    }
 }
 
-const Ul = styled.ul`
-  background-color: #333;
-  display: ${state => state.display};
-  justify-content: center;
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  max-width: 20%;
   margin: 0 auto;
   list-style: none;
-  background-color : ${props => props.color};
 `
 
-const Li = styled.li`
-  float: top;
-  border-style: solid;
-  border-color: #88922a;
-  text-align: center;
-  background-color : ${props => props.color};
-  
-`
-
-
-const A = styled.a`
+const Button = styled.button`
   display: block;
-  padding: 8px;
-  background-color: #dddddd;
+  box-shadow: 0.25em 0.25em black;
+  background-color: white;
   border-radius: 3px;
-  
-
   :hover {
-    background-color: #111;
+    background-color: bisque;
+  }
+
+  :focus {
+    background-color: bisque;
   }
 `
-
 
 const StyledHeader = styled.header`
   padding : 8px;
 `
-
-
-
