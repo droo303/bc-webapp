@@ -1,11 +1,11 @@
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import styled from 'styled-components';
-import keylock from    './assets/keylock.png'
-import coinflip from './assets/coin_flip.png'
-import info from './assets/info.svg'
+import keylock from '../assets/keylock.png'
+import coinflip from '../assets/coin_flip.png'
+import info from '../assets/info.svg'
 
 
-export default class Buttons extends PureComponent {
+export default class Buttons extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,16 +22,17 @@ export default class Buttons extends PureComponent {
         }
     }
 
+
     render() {
         return (
             <Div>
-                <StyledButton>
+                <StyledButton onClick={this.props.onClick.bind(this,"info")}>
                     <Img src={info} alt="info"/>
                 </StyledButton>
-                <StyledButton>
+                <StyledButton onClick={this.props.onClick.bind(this,"coinflip")}>
                     <Img src={coinflip} alt="coinflip"/>
                 </StyledButton>
-                <StyledButton>
+                <StyledButton onClick={this.props.onClick.bind(this,"keylock")}>
                     <Img src={keylock} alt='keylock'/>
                 </StyledButton>
                 <StyledButton>
