@@ -1,8 +1,14 @@
 import {Component} from "react";
 import styled from 'styled-components';
+import { createBet } from '../contracts/Bets'
 
 export default class BetsContent extends Component {
 
+    handleClick = () => {
+        const betId = document.getElementById("betId").value;
+        const value = document.getElementById("value").value;
+        createBet(betId,value)
+    }
     render() {
         return (
             <div>
@@ -16,7 +22,11 @@ export default class BetsContent extends Component {
                     </p>
                 </Div>
                 <Div>
-                    <button>Create Bet</button>
+                    <form>
+                        <input type="text" id="betId"/>
+                        <input type="text" id="value"/>
+                    </form>
+                    <button onClick={this.handleClick}>Create Bet</button>
                 </Div>
             </div>
 
