@@ -1,14 +1,21 @@
 import {Component} from "react";
 import styled from 'styled-components';
-import { createBet } from '../contracts/Bets'
+import { createBet,getBet, watchCreated } from '../contracts/Bets'
 
 export default class BetsContent extends Component {
 
-    handleClick = () => {
+    handleClickCreate = () => {
         const betId = document.getElementById("betId").value;
         const value = document.getElementById("value").value;
-        createBet(betId,value)
+        createBet(betId,value).then(() => console.log("Created")).catch(e => console.log("Problem with Creation"))
     }
+
+    handleClickGet = () => {
+        const betId = document.getElementById("betId").value;
+        const bet = getBet(betId)
+        console.log(bet)
+    }
+
     render() {
         return (
             <div>
@@ -26,7 +33,9 @@ export default class BetsContent extends Component {
                         <input type="text" id="betId"/>
                         <input type="text" id="value"/>
                     </form>
-                    <button onClick={this.handleClick}>Create Bet</button>
+                    <button onClick={this.handleClickCreate}>Create Bet</button>
+                    <button onClick={this.handleClickGet}>Get Bet</button>
+                    <button onClick={watchCreated}>Watch Bet</button>
                 </Div>
             </div>
 

@@ -19,7 +19,8 @@ export default class Header extends Component {
    constructor(props) {
        super(props);
        this.state = {
-           button_text: ''
+           button_text: '',
+           account: ''
        }
    }
 
@@ -32,7 +33,9 @@ export default class Header extends Component {
            if (this.state.button_text === "Install") {
                 // TODO open installation
            } else if (this.state.button_text === "Connect to wallet") {
-               await ethereum.request({method: 'eth_requestAccounts'});}
+               const accounts = await ethereum.request({method: 'eth_requestAccounts'});
+               this.setState({account: accounts[0]});
+           }
        } catch (e) {
            console.error(e);
        }
@@ -43,12 +46,18 @@ export default class Header extends Component {
             <StyledHeader>
                     <Nav>
                         <Button>Home</Button>
+                        <Span>Connected to account: {this.state.account} </Span>
                         <Button onClick={this.handleClick.bind(this)}>{this.state.button_text}</Button>
                     </Nav>
             </StyledHeader>
         );
     }
 }
+
+const Span = styled.span`
+  background-color: white;
+  color: black;
+`
 
 const Nav = styled.nav`
   display: flex;
