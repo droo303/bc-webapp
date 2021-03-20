@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import styled from 'styled-components';
+import {ethereum} from "../utils/provider";
 
 
-const { ethereum } = window;
 const isMetaMaskInstalled = () => {
     return Boolean(ethereum && ethereum.isMetaMask);
 };

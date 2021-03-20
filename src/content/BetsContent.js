@@ -1,6 +1,6 @@
 import {Component} from "react";
 import styled from 'styled-components';
-import { createBet,getBet, watchCreated } from '../contracts/Bets'
+import {createBet, getBet, subscribeToEvent, watchCreated} from '../contracts/Bets'
 import BetsArray from "../frame/BetsArray";
 
 export default class BetsContent extends Component {
@@ -12,16 +12,9 @@ export default class BetsContent extends Component {
         this.fill = this.fill.bind(this)
     }
 
-    handleClickCreate = () => {
-        const betId = document.getElementById("betId").value;
-        const value = document.getElementById("value").value;
-        createBet(betId,value).then(() => console.log("Created")).catch(e => console.log("Problem with Creation"))
-    }
-
     handleClickGet = () => {
         const betId = document.getElementById("betId").value;
         getBet(betId).then((c) => console.log(c,"Bet exists")).catch(e => console.log("Bot not found"));
-
     }
 
     fill = async () => {
@@ -50,18 +43,7 @@ export default class BetsContent extends Component {
                     </p>
                 </Div>
                 <Div>
-                    <form>
-                        <input type="text" id="betId"/>
-                        <input type="text" id="value"/>
-                    </form>
-                    <button onClick={this.handleClickCreate}>Create Bet</button>
-                    <button onClick={this.handleClickGet}>Get Bet</button>
-                    <button onClick={watchCreated}>Watch Bet</button>
-                    <button onClick={this.fill}>Fill Bet</button>
-
-                    <span>
                         <BetsArray/>
-                    </span>
                 </Div>
             </div>
 
