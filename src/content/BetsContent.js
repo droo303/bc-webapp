@@ -1,8 +1,16 @@
 import {Component} from "react";
 import styled from 'styled-components';
 import { createBet,getBet, watchCreated } from '../contracts/Bets'
+import BetsArray from "../frame/BetsArray";
 
 export default class BetsContent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            betsArr: ["foo","bar"]
+        }
+        this.fill = this.fill.bind(this)
+    }
 
     handleClickCreate = () => {
         const betId = document.getElementById("betId").value;
@@ -12,8 +20,21 @@ export default class BetsContent extends Component {
 
     handleClickGet = () => {
         const betId = document.getElementById("betId").value;
-        const bet = getBet(betId)
-        console.log(bet)
+        getBet(betId).then((c) => console.log(c,"Bet exists")).catch(e => console.log("Bot not found"));
+
+    }
+
+    fill = async () => {
+        let arr = []
+        for (let i = 0; i < 10; i++) {
+            try {
+                let bet = await getBet(i);
+                arr.push(bet);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        this.setState({betsArr:arr});
     }
 
     render() {
@@ -36,6 +57,11 @@ export default class BetsContent extends Component {
                     <button onClick={this.handleClickCreate}>Create Bet</button>
                     <button onClick={this.handleClickGet}>Get Bet</button>
                     <button onClick={watchCreated}>Watch Bet</button>
+                    <button onClick={this.fill}>Fill Bet</button>
+
+                    <span>
+                        <BetsArray/>
+                    </span>
                 </Div>
             </div>
 
