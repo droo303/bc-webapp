@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, {Component} from "react";
-import {createBet, getBet} from "../contracts/Bets";
+import {createBet} from "../../contracts/Bets";
 
 
 export default class MakeBet extends Component {

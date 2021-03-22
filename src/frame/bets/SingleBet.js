@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, {Component} from "react";
-import {getBet} from "../contracts/Bets";
+import {getBet} from "../../contracts/Bets";
 import MakeBet from "./MakeBet";
 import TakeBet from "./TakeBet";
 import ClaimBet from "./ClaimBet";
@@ -13,14 +13,14 @@ export default class SingleBet extends Component {
         this.state = {
             adam: "",
             betty: "",
-            amount: "",
+            value: "",
             winner: ""
         }
     }
 
     componentDidMount = () => {
         getBet(this.props.id).then(value => {
-            this.setState({...value})
+            this.setState({...value,id: this.props.id})
         });
     }
 

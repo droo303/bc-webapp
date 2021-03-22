@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {Component} from "react";
 import Blockies from 'react-blockies';
+import {takeBet} from "../../contracts/Bets";
 
 
 export default class TakeBet extends Component {
@@ -22,19 +23,25 @@ export default class TakeBet extends Component {
         return addr.substring(0,4) + "..." + addr.substring(39,41);
     }
 
+    handleClickTakeBet = () => {
+        const betId = this.props.id;
+        const value = this.props.value;
+        takeBet(betId,value).then(() => console.log("Accepted")).catch(e => console.log("Problem with Accepting"))
+    }
+
     render() {
         let shortAdam = this.parseAddress(this.props.adam);
 
         return (
-            <div>
+            <>
                 <Span>Bet Versus</Span>
                 <Span>
                     {shortAdam}
                     <Blockies seed={this.props.adam}/>
                 </Span>
                 <Span>{this.weiToEth(this.props.value)} ETH</Span>
-                <button>Take Bet</button>
-            </div>
+                <button onClick={this.handleClickTakeBet}>Take Bet</button>
+            </>
         )
     }
 }
@@ -46,4 +53,3 @@ const Span = styled.span`
   grid-template-columns: auto auto;
   justify-content: space-evenly;
 `
-

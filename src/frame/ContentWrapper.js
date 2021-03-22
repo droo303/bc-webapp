@@ -1,7 +1,7 @@
-import BetsContent from "../content/BetsContent";
+import BetsMainContainer from "./bets/BetsMainContainer";
 import InfoContent from "../content/InfoContent";
 import React, {Component} from "react";
-import KeylockContent from "../content/KeylockContent";
+import TimelockMainContainer from "./timelock/TimelockMainContainer";
 
 export default class ContentWrapper extends Component {
     constructor(props) {
@@ -22,8 +22,8 @@ export default class ContentWrapper extends Component {
         return (
             <div>
                 {this.state.content === "info" && <InfoContent/>}
-                {this.state.content === "coinflip" && <BetsContent/>}
-                {this.state.content === "keylock" && <KeylockContent/>}
+                {this.state.content === "coinflip" && <BetsMainContainer/>}
+                {this.state.content === "keylock" && <TimelockMainContainer/>}
             </div>
         )
     }

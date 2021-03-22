@@ -10,6 +10,7 @@
     "@web3-react/network-connector": "^6.1.9",
     "blockies": "^0.0.2",
     "blockies-identicon": "^0.1.0",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-blockies": "^1.4.1",
     "react-dom": "^17.0.1",

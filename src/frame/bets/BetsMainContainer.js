@@ -1,9 +1,10 @@
 import {Component} from "react";
 import styled from 'styled-components';
-import {createBet, getBet, subscribeToEvent, watchCreated} from '../contracts/Bets'
-import BetsArray from "../frame/BetsArray";
+import {createBet, getBet, subscribeToEvent, watchCreated} from '../../contracts/Bets'
+import BetsArray from "./BetsArray";
+import BetsText from "../../text/BetsText";
 
-export default class BetsContent extends Component {
+export default class BetsMainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,16 +35,10 @@ export default class BetsContent extends Component {
         return (
             <div>
                 <Div>
-                    <p>
-                        This utility is called <em>betting</em>. You can offer a coinflip bet by locking an arbitrary
-                        amount of ETH.
-                        Anybody can accept the offer by locking the same amount.
-                        Then one of the participants is randomly chosen as a winner and both of the locked halves are
-                        sent to him.
-                    </p>
+                   <BetsText/>
                 </Div>
                 <Div>
-                        <BetsArray/>
+                    <BetsArray/>
                 </Div>
             </div>
 

@@ -5,7 +5,7 @@ import coinflip from '../assets/coin_flip.png'
 import info from '../assets/info.svg'
 
 
-export default class MainButtons extends Component {
+export default class MainButtonsContainer extends Component {
     constructor(props) {
         super(props);
     }

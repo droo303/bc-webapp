@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MainButtons from "./MainButtons";
+import MainButtonsContainer from "./MainButtonsContainer";
 import Header from "./Header";
 import styled from 'styled-components';
 import background from '../assets/background-1280_1920.png'
@@ -23,7 +23,7 @@ export default class App extends Component {
     return (
         <Div>
           <Header/>
-          <MainButtons onClick={this.handleClick}/>
+          <MainButtonsContainer onClick={this.handleClick}/>
           <ContentWrapper content={this.state.content}/>
         </Div>
     );

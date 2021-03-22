@@ -1,8 +1,7 @@
 import BetsContract from '../ABI/bet.json'
 import {ethereum, web3} from '../utils/provider'
 
-var contractInstance = null;
-
+let contractInstance = null;
 export const getContractInstance = async () => {
     if (contractInstance === null) {
         const contractAddress = '0x31Edd1Ddf4933D33bE0a0D86fbCF96f79b814c7B';
@@ -11,7 +10,11 @@ export const getContractInstance = async () => {
     return contractInstance;
 }
 
-export const subscribeToEvent =  async () => {
+export const getAccounts = async () => {
+    return await ethereum.request({method: 'eth_requestAccounts'});
+}
+
+export const subscribeToEvent = async () => {
     const ci = await getContractInstance()
     ci.events.betCreated({
         fromBlock: 0
@@ -24,9 +27,15 @@ export const subscribeToEvent =  async () => {
     })
 }
 
+export const getBet = async (betId) => {
+    const ci = await getContractInstance();
+    let betResponse = await ci.methods.getBet(betId).call();
+    return {adam: betResponse[0], betty: betResponse[1], value: betResponse[2], winner: betResponse[3]};
+}
+
 export const createBet = async (betId, value) => {
-    const ci = await getContractInstance()
-    const accounts = await ethereum.request({method: 'eth_requestAccounts'});
+    const ci = await getContractInstance();
+    const accounts = await getAccounts();
 
     ci.methods.createBet(betId).send({
         from: accounts[0],
@@ -39,10 +48,35 @@ export const createBet = async (betId, value) => {
         });
 }
 
-export const getBet = async (betId) => {
+export const takeBet = async (betId, value) => {
     const ci = await getContractInstance();
-    let betResponse = await ci.methods.getBet(betId).call();
-    return {adam: betResponse[0], betty: betResponse[1], value: betResponse[2], winner: betResponse[3]};
+    const accounts = await getAccounts();
+
+    ci.methods.acceptBet(betId).send({
+        from: accounts[0],
+        value: value
+    }).on('transactionHash', (hash) => {
+        console.log(hash, "hash")
+    }).on('confirmation', (confirmationNumber, receipt) => {
+        console.log(confirmationNumber, receipt, "cn")
+    });
+}
+
+export const claimBet = async (betId, value) => {
+    const ci = await getContractInstance();
+    const accounts = await getAccounts();
+    ci.methods.claim(betId).send({
+        from: accounts[0],
+        value: value
+    }).on('transactionHash', (hash) => {
+        console.log(hash, "hash")
+    }).then(receipt => {
+        console.log('Mined', receipt)
+        if (receipt.status === '0x1' || receipt.status === 1) {
+            console.log('Transaction Success')
+        } else
+            console.log('Transaction Failed')
+    })
 }
 
 export const watchCreated = async () => {
