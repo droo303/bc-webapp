@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Blockies from 'react-blockies';
 import {takeBet} from "../../contracts/Bets";
+import {shortifyAddress} from "../../utils/shortenAddr";
 
 
 export default class TakeBet extends Component {
@@ -16,21 +17,17 @@ export default class TakeBet extends Component {
     }
 
     weiToEth = (amount) => {
-        return amount/1000000000000000000;
-    }
-
-    parseAddress = (addr) => {
-        return addr.substring(0,4) + "..." + addr.substring(39,41);
+        return amount / 1000000000000000000;
     }
 
     handleClickTakeBet = () => {
         const betId = this.props.id;
         const value = this.props.value;
-        takeBet(betId,value).then(() => console.log("Accepted")).catch(e => console.log("Problem with Accepting"))
+        takeBet(betId, value).then(() => console.log("Accepted")).catch(e => console.log("Problem with Accepting"))
     }
 
     render() {
-        let shortAdam = this.parseAddress(this.props.adam);
+        let shortAdam = shortifyAddress(this.props.adam);
 
         return (
             <>

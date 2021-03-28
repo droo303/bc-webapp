@@ -1,7 +1,8 @@
-import BetsMainContainer from "./bets/BetsMainContainer";
+import BetsContainer from "./bets/BetsContainer";
 import InfoContent from "../content/InfoContent";
 import React, {Component} from "react";
-import TimelockMainContainer from "./timelock/TimelockMainContainer";
+import TimelockContainer from "./timelock/TimelockContainer";
+import styled from 'styled-components';
 
 export default class ContentWrapper extends Component {
     constructor(props) {
@@ -20,11 +21,16 @@ export default class ContentWrapper extends Component {
 
     render() {
         return (
-            <div>
+            <Div>
                 {this.state.content === "info" && <InfoContent/>}
-                {this.state.content === "coinflip" && <BetsMainContainer/>}
-                {this.state.content === "keylock" && <TimelockMainContainer/>}
-            </div>
+                {this.state.content === "coinflip" && <BetsContainer/>}
+                {this.state.content === "keylock" && <TimelockContainer/>}
+            </Div>
         )
     }
 }
+
+const Div = styled.div`
+  grid-column: 2;
+  grid-row: 1 / 3; 
+`

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Blockies from 'react-blockies';
 import {claimBet} from "../../contracts/Bets";
+import {shortifyAddress} from "../../utils/shortenAddr";
 
 
 export default class ClaimBet extends Component {
@@ -11,7 +12,7 @@ export default class ClaimBet extends Component {
     }
 
     parseAddress = (addr) => {
-        return addr.substring(0, 4) + "..." + addr.substring(39, 41);
+        return addr.substring(0, 5) + ".." + addr.substring(39, 42);
     }
 
     handleOnClickClaim = () => {
@@ -20,9 +21,9 @@ export default class ClaimBet extends Component {
     }
 
     render() {
-        let shortAdam = this.parseAddress(this.props.adam);
-        let shortBetty = this.parseAddress(this.props.betty);
-        let shortWinner = this.parseAddress(this.props.winner);
+        let shortAdam = shortifyAddress(this.props.adam);
+        let shortBetty = shortifyAddress(this.props.betty);
+        let shortWinner = shortifyAddress(this.props.winner);
 
         return (
             <>

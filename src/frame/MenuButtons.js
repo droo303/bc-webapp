@@ -5,7 +5,7 @@ import coinflip from '../assets/coin_flip.png'
 import info from '../assets/info.svg'
 
 
-export default class MainButtonsContainer extends Component {
+export default class MenuButtons extends Component {
     constructor(props) {
         super(props);
     }
@@ -31,11 +31,12 @@ export default class MainButtonsContainer extends Component {
 }
 
 const Div = styled.div`
+  grid-column: 1;
   position: static;
   justify-content: center;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  display: block;
   margin-top: 3em;
+  width: auto;
 `
 
 const Img = styled.img`

@@ -18,6 +18,6 @@ export default class BetsArray extends Component {
 
 const Div = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
   justify-content: center;
 `

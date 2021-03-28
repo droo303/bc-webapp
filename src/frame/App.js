@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import MainButtonsContainer from "./MainButtonsContainer";
-import Header from "./Header";
+import MenuButtons from "./MenuButtons";
 import styled from 'styled-components';
-import background from '../assets/background-1280_1920.png'
+import background from '../assets/eth.jpg'
 import ContentWrapper from "./ContentWrapper";
+import FooterAccount from "./FooterAccount";
 
 export default class App extends Component {
   constructor(props) {
@@ -22,16 +22,20 @@ export default class App extends Component {
   render() {
     return (
         <Div>
-          <Header/>
-          <MainButtonsContainer onClick={this.handleClick}/>
-          <ContentWrapper content={this.state.content}/>
+            <MenuButtons onClick={this.handleClick}/>
+            <FooterAccount/>
+            <ContentWrapper content={this.state.content}/>
         </Div>
     );
   }
 }
 
 const Div = styled.div`
+  display: grid;
+  grid-template-columns: 10em auto 10em;
+  grid-template-rows: auto 10em;
   background-image: url(${background});
   background-size: cover;
   min-height: 100vh;
+  box-sizing: border-box;
 `

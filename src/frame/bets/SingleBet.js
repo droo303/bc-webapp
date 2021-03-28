@@ -49,8 +49,9 @@ export default class SingleBet extends Component {
 
 const Div = styled.div`
   border-style: solid;
-  border-radius: 5%;
+  border-radius: 2%;
   margin: 2em;
   display: grid;
   width: 10em;
+  background-color: white;
 `

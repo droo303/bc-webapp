@@ -1,19 +1,6 @@
 import React, {Component} from "react";
 import styled from 'styled-components';
-import {ethereum} from "../utils/provider";
-
-
-const isMetaMaskInstalled = () => {
-    return Boolean(ethereum && ethereum.isMetaMask);
-};
-
-const MetaMaskClientCheck = () => {
-    if (!isMetaMaskInstalled()) {
-        return String("Install");
-    } else {
-        return String("Connect to wallet");
-    }
-};
+import {ethereum, isMetaMaskInstalled} from "../utils/provider";
 
 export default class Header extends Component {
    constructor(props) {
@@ -25,7 +12,7 @@ export default class Header extends Component {
    }
 
    componentDidMount() {
-        this.setState({button_text: MetaMaskClientCheck()})
+        isMetaMaskInstalled() ? this.setState({button_text:"Connect to wallet"}) : this.setState({button_text:"Install"});
    }
 
    async handleClick() {
