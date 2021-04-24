@@ -1,8 +1,10 @@
+import React, {Component} from "react";
+import styled from "styled-components";
 import BetsContainer from "./bets/BetsContainer";
 import InfoContent from "../content/InfoContent";
-import React, {Component} from "react";
 import TimelockContainer from "./timelock/TimelockContainer";
-import styled from 'styled-components';
+import FolioContainer from "./portfolio/FolioContainer";
+import WalletContainer from "./wallet/walletContainer";
 
 export default class ContentWrapper extends Component {
     constructor(props) {
@@ -25,6 +27,8 @@ export default class ContentWrapper extends Component {
                 {this.state.content === "info" && <InfoContent/>}
                 {this.state.content === "coinflip" && <BetsContainer/>}
                 {this.state.content === "keylock" && <TimelockContainer/>}
+                {this.state.content === "portfolio" && <FolioContainer/>}
+                {this.state.content === "wallet" && <WalletContainer/>}
             </Div>
         )
     }

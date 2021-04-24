@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import keylock from '../assets/keylock.png'
 import coinflip from '../assets/coin_flip.png'
 import info from '../assets/info.svg'
+import portfolio from '../assets/donuts-chart.svg'
+import wallet from '../assets/wallet.svg'
 
 
 export default class MenuButtons extends Component {
@@ -22,8 +24,11 @@ export default class MenuButtons extends Component {
                 <StyledButton onClick={this.props.onClick.bind(this, "keylock")}>
                     <Img src={keylock} alt='keylock'/>
                 </StyledButton>
-                <StyledButton>
-                    <Img src={null} alt={null}/>
+                <StyledButton onClick={this.props.onClick.bind(this, "portfolio")}>
+                    <Img src={portfolio} alt='portfolio'/>
+                </StyledButton>
+                <StyledButton onClick={this.props.onClick.bind(this, "wallet")}>
+                    <Img src={wallet} alt='wallet'/>
                 </StyledButton>
             </Div>
         );

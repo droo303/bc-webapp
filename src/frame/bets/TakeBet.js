@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Blockies from 'react-blockies';
 import {takeBet} from "../../contracts/Bets";
-import {shortifyAddress} from "../../utils/shortenAddr";
+import {shortifyAddress} from "../../utils/utils";
 
 
 export default class TakeBet extends Component {

@@ -14,14 +14,15 @@ export default class SingleBet extends Component {
             adam: "",
             betty: "",
             value: "",
-            winner: ""
+            winner: "",
+            err: false
         }
     }
 
     componentDidMount = () => {
         getBet(this.props.id).then(value => {
             this.setState({...value,id: this.props.id})
-        });
+        }).catch((e) => {throw(e)})
     }
 
     render() {

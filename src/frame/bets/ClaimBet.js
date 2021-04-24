@@ -2,14 +2,12 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Blockies from 'react-blockies';
 import {claimBet} from "../../contracts/Bets";
-import {shortifyAddress} from "../../utils/shortenAddr";
-
+import {shortifyAddress} from "../../utils/utils";
+import {weiToEth} from "../../utils/provider";
 
 export default class ClaimBet extends Component {
 
-    weiToEth = (amount) => {
-        return amount / 1000000000000000000;
-    }
+
 
     parseAddress = (addr) => {
         return addr.substring(0, 5) + ".." + addr.substring(39, 42);
@@ -35,7 +33,7 @@ export default class ClaimBet extends Component {
                     {shortBetty}
                     <Blockies seed={this.props.betty}/>
                 </Span>
-                <Span>{this.weiToEth(this.props.value) * 2} ETH</Span>
+                <Span>{weiToEth(this.props.value) * 2} ETH</Span>
                 <Span>
                     {shortWinner}
                     <Blockies seed={this.props.winner}/>

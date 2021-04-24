@@ -1,17 +1,13 @@
 import BetsContract from '../ABI/bet.json'
-import {ethereum, web3} from '../utils/provider'
+import {web3, BETS_CONTRACT_PRIVATE} from '../utils/provider'
+import {getAccounts} from '../utils/provider'
 
 let contractInstance = null;
 export const getContractInstance = async () => {
     if (contractInstance === null) {
-        const contractAddress = '0x31Edd1Ddf4933D33bE0a0D86fbCF96f79b814c7B';
-        contractInstance = new web3.eth.Contract(BetsContract, contractAddress);
+        contractInstance = new web3.eth.Contract(BetsContract, BETS_CONTRACT_PRIVATE);
     }
     return contractInstance;
-}
-
-export const getAccounts = async () => {
-    return await ethereum.request({method: 'eth_requestAccounts'});
 }
 
 export const subscribeToEvent = async () => {
@@ -27,10 +23,15 @@ export const subscribeToEvent = async () => {
     })
 }
 
+
 export const getBet = async (betId) => {
     const ci = await getContractInstance();
-    let betResponse = await ci.methods.getBet(betId).call();
-    return {adam: betResponse[0], betty: betResponse[1], value: betResponse[2], winner: betResponse[3]};
+    let ret = null;
+    await ci.methods.getBet(betId).call().then(value => {
+            ret =  {adam: value[0], betty: value[1], value: value[2], winner: value[3]};
+        }, (e) => {if (!window.badNetwork) {alert("Couldn't find bets, are you on the right network?"); window.badNetwork = true;}}
+    );
+    return ret;
 }
 
 export const createBet = async (betId, value) => {
@@ -62,12 +63,11 @@ export const takeBet = async (betId, value) => {
     });
 }
 
-export const claimBet = async (betId, value) => {
+export const claimBet = async (betId) => {
     const ci = await getContractInstance();
     const accounts = await getAccounts();
     ci.methods.claim(betId).send({
         from: accounts[0],
-        value: value
     }).on('transactionHash', (hash) => {
         console.log(hash, "hash")
     }).then(receipt => {

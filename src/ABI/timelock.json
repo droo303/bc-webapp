@@ -1,7 +1,152 @@
 [
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "acceptDuoLock",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "len",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "period",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "partner",
+        "type": "address"
+      }
+    ],
+    "name": "lockDuo",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "len",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "period",
+        "type": "uint256"
+      }
+    ],
+    "name": "lockSingle",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "unlockDuo",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "unlockSingle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
-    "name": "getTransactions",
+    "name": "getAllLocks",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "timestampLock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestampUnlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "in_use",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct TimeLock.Lock[10]",
+        "name": "lout",
+        "type": "tuple[10]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getDuoLock",
     "outputs": [
       {
         "components": [
@@ -9,6 +154,16 @@
             "internalType": "uint256",
             "name": "id",
             "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "partner",
+            "type": "address"
           },
           {
             "internalType": "uint256",
@@ -27,13 +182,18 @@
           },
           {
             "internalType": "bool",
-            "name": "withdrawn",
+            "name": "accepted",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "in_use",
             "type": "bool"
           }
         ],
-        "internalType": "struct TimeLock.Transaction[]",
+        "internalType": "struct TimeLock.LockDuo",
         "name": "",
-        "type": "tuple[]"
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -42,38 +202,55 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
       }
     ],
-    "name": "idCounter",
+    "name": "getLock",
     "outputs": [
       {
-        "internalType": "uint256",
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "timestampLock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestampUnlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "in_use",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct TimeLock.Lock",
         "name": "",
-        "type": "uint256"
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "isAnySlotOpen",
+    "outputs": [
       {
-        "internalType": "uint256",
-        "name": "len",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "period",
-        "type": "uint256"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
-    "name": "lockAmount",
-    "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "view",
     "type": "function"
   }
 ]

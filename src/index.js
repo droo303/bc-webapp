@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './frame/App';
 import Web3 from "web3";
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 
 window.web3 = new Web3(Web3.givenProvider);
 ReactDOM.render(
@@ -10,4 +12,3 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
-

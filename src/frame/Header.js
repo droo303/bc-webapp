@@ -18,7 +18,6 @@ export default class Header extends Component {
    async handleClick() {
        try {
            if (this.state.button_text === "Install") {
-                // TODO open installation
            } else if (this.state.button_text === "Connect to wallet") {
                const accounts = await ethereum.request({method: 'eth_requestAccounts'});
                this.setState({account: accounts[0]});
