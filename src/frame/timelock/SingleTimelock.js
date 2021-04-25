@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {getLock, unlockSingle} from "../../contracts/Timelock";
 import {weiToEth} from "../../utils/provider";
 import styled from "styled-components";
-import {claimBet} from "../../contracts/Bets";
 
 export default class SingleTimelock extends Component {
     constructor(props) {

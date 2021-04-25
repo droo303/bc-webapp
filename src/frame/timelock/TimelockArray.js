@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import SingleTimelock from "./SingleTimelock";
-import {getLock, lockSingle} from "../../contracts/Timelock";
+import {lockSingle} from "../../contracts/Timelock";
 import styled from "styled-components";
 import DuoTimelock from "./DuoTimelock";
 import LockPrompt from "./LockPrompt";

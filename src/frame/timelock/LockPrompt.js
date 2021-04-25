@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {lockDuo, lockSingle} from "../../contracts/Timelock";
+import {lockSingle} from "../../contracts/Timelock";
 import {web3} from '../../utils/provider'
 import greenCheckmark from '../../assets/greenCheckmark.png'
 import styled from "styled-components";

@@ -1,7 +1,6 @@
 import {Component} from "react";
 import styled from "styled-components";
 import TimelockArray from "./TimelockArray";
-import TimelockText from "../../text/TimelockText";
 
 export default class TimelockContainer extends Component {
     render() {
