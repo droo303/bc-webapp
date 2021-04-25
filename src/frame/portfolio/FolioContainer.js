@@ -20,11 +20,9 @@ export default class FolioContainer extends Component {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Task', 'Hours per Day'],
-                        ['Work', 11],
-                        ['Eat', 2],
-                        ['Commute', 2],
-                        ['Watch TV', 2],
-                        ['Sleep', 7],
+                        ['Gold', this.state.value],
+                        ['Silver', 2],
+                        ['ETH', 2],
                     ]}
                     options={{
                         title: 'Portfolio',
